@@ -1,5 +1,5 @@
 class Piece {
-    constructor(name){
+    constructor(name, composer, length, key, period, like, url, img_url){
         this.name = name;
         this.composer = composer;
         this.length = length;

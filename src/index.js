@@ -1,4 +1,4 @@
-const app = new AppContainer;
+const app = new AppContainer
 app.getInitialPieces();
 app.bindEventListeners();
 

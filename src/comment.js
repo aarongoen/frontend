@@ -1,7 +1,8 @@
 class Comment {
-    constructor(text){
+    constructor(text, piece){
         this.text = text;
-        this.piece_id = piece_id;
+        this.piece = piece;
+        AppContainer.comments.push(this)
     }
 }
 
