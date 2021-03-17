@@ -15,20 +15,24 @@
     <p>To access a score click on it.</p>
     <div id="root">
 
-    </div>
-    <p style="text-align:center">
+    <!-- </div> -->
+    <!-- <p style="text-align:center">
         Request another piece <button id="newPieceBtn">request</button>
-    </p>
+    </p> -->
     
     <!-- <div id="piece-collection">
     </div> -->
 
-    <div id="piece-preview-and-link">
+    <!-- <div id="piece-preview-and-link">
         <p><a href="imslp.org/wiki/Agnus_(Josquin_Desprez)"> <img src="https://cdn.imslp.org/images/thumb/pdfs/fc/f5457ebde8f99c2eea9e785fe00d74a96289d2b5.png" alt="Josquin Sample Score Page" width="350" height="250"></a></p>
-    </div>
+    </div> -->
 
-    <p>like<button class="like-glyph">&#x2661;</button></p>
 
+    <form id="comment-form">
+        <h3>Comment</h3>
+        <textarea id="text" name="comment[text]" id="comment" class="input-text" placeholder="Your comment here..."></textarea>
+        <button data-comment-id="${comment.id}" type="submit">submit</button>
+    </form>
    
 </body>
 

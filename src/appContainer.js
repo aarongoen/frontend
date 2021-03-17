@@ -10,12 +10,13 @@ class AppContainer {
         this.rootEl = document.getElementById('root')
      }
 
-    bindEventListeners() {
-    const pieceCollection = document.querySelector('#piece-collection')
-    const btn = document.getElementById("newPieceBtn");
-    btn.addEventListener('click', this.getRandomPieces)
-    // debugger
-    };
+    // bindEventListeners() {
+    // const pieceCollection = document.querySelector('#piece-collection')
+    // const btn = document.getElementById("newPieceBtn");
+    // btn.addEventListener('click', this.getRandomPieces)
+
+    // // debugger
+    // };
 
     getRandomPieces() {
         // console.log('getting pieces')
@@ -45,18 +46,20 @@ class AppContainer {
 
     renderPieces() {
     const piecePreviewAndLinkEl = document.getElementById('piece-preview-and-link')
+    const EMPTY_HEART = '♡'
+    const FULL_HEART = '♥'
 
     AppContainer.pieces.forEach(piece => {
         let newDiv = document.createElement("div"),
         btn = document.createElement("button"),
         pTag = document.createElement("p")
+        const commentForm = document.getElementById('comment-form')
         
         newDiv.className = "card" 
         pTag.innerText = piece.like
         btn.innerText = "Like <3"
         btn.className = "like-btn"
-        const EMPTY_HEART = '♡'
-        const FULL_HEART = '♥'
+     
         let startHeart = piece.like ? FULL_HEART : EMPTY_HEART
 
         const showHeart = () => {
@@ -73,17 +76,48 @@ class AppContainer {
         this.rootEl.innerHTML += `<h2>${piece.name}  -${piece.composer}</h2>
         <p><a href="${piece.url}" target="_blank" rel="noopener noreferrer"><img border="0" alt="link to piece page"
          src="${piece.img_url}" width="550" height="700"></a></p>
-        <p>like <button data-piece-id="${piece.id}" class="like-btn">${startHeart}</button></p>`
+    like <button data-piece-id="${piece.id}" class="like-btn">${startHeart}</button>
+        Comment    <form id="comment-form">
+        <h3>Comment</h3>
+        <textarea id="text" name="comment[text]" id="comment" class="input-text" placeholder="Your comment here..."></textarea>
+        <button data-comment-id="comment-id" type="submit">submit</button>
+    </form>`
 
     })
-    
-    document.querySelectorAll('.like-btn').forEach(function(btn) {
-         btn.addEventListener('click', (e) => (console.log(e.target.dataset)))
-         debugger
+    //  adds an event listener on button to toggle the heart
+    document.querySelectorAll('.like-btn').forEach((btn) => {
+         btn.addEventListener('click',  (e) => {
+             console.log('from eventListener')
+             let pieceId = e.target.dataset.pieceId
+             let currentPiece = AppContainer.pieces[pieceId]
+             console.log(currentPiece)
+             let changeHeart = function() {
+                 if (currentPiece.like === true) {
+                    currentPiece.like = false
+                    btn.innerHTML = EMPTY_HEART
+                     }
+                 else {
+                    currentPiece.like = true
+                    btn.innerHTML = FULL_HEART
+                 }
+                }
+             changeHeart()
+            })
+  
     })
+
     }
-}
-        //  add event listener on button to toggle the heart
+
+    // function bindCommentFormEventListener() {
+    //     commentForm.addEventListener('submit', function(e) {
+    //         e.preventDefault();
+    //         let formData = new FormData(e.target)
+    //         console.log(formData)        
+    //     });
+    // }
+
+    }
+
          
   
 
