@@ -3,11 +3,15 @@ class AppContainer {
      comments = []
      recitals = {}
 
-    // const rootEl = document.getElementById('root')
+     constructor(pieces, comments, recitals) {
+        this.pieces = pieces;
+        this.comments = comments;
+        this.recitals = recitals;
+        this.rootEl = document.getElementById('root')
+     }
 
-// app.addEventListener("DOMContentLoaded", ()=>{
     bindEventListeners() {
-//     const pieceCollection = document.querySelector('#piece-collection')
+    const pieceCollection = document.querySelector('#piece-collection')
     const btn = document.getElementById("newPieceBtn");
     btn.addEventListener('click', this.getRandomPieces)
     // debugger
@@ -21,7 +25,7 @@ class AppContainer {
         randomPieces.push(AppContainer.pieces[Math.floor(Math.random()*AppContainer.pieces.length)]);
         };
         return randomPieces
-        debugger
+        // debugger
     }
 
     getInitialPieces() {
@@ -30,52 +34,100 @@ class AppContainer {
         .then(data => {
             console.log(data)
             data.forEach(piece => {
-                new Piece(piece.name,
-                piece.composer,
-                piece.length,
-                piece.key,
-                piece.period,
-                piece.like,
-                piece.url,
-                piece.img_url)
+                new Piece(piece)
             });
+            this.renderPieces();
         })
         .catch(err => alert(err))
-    };
-    // debugger
-}
+        console.log(AppContainer.pieces)
+    }
 
 
-//     populateNewPiece(data) {
-//     data.forEach(piece => {
-//         rootEl.innerHTML += `<h2>${piece.name} -${piece.composer}</h2>
-//         <p>period: ${piece.period}</p>
-//         <p>key: ${piece.key}</p>
-//         <p>length: ${piece.length}</p>
-//         <p>liked?: ${piece.like}</p>`
-//     })
-//     return populateNewPiece;
-// }
+    renderPieces() {
+    const piecePreviewAndLinkEl = document.getElementById('piece-preview-and-link')
 
+    AppContainer.pieces.forEach(piece => {
+        let newDiv = document.createElement("div"),
+        btn = document.createElement("button"),
+        pTag = document.createElement("p")
+        
+        newDiv.className = "card" 
+        pTag.innerText = piece.like
+        btn.innerText = "Like <3"
+        btn.className = "like-btn"
+        const EMPTY_HEART = '♡'
+        const FULL_HEART = '♥'
+        let startHeart = piece.like ? FULL_HEART : EMPTY_HEART
 
-// const renderPieces = function (pieces) {
-//     console.log(pieces)
+        const showHeart = () => {
+            console.log('running!')
+            if (piece.like === true) {
+                startHeart = FULL_HEART }
+            else if (piece.like === null) {
+                startHeart = EMPTY_HEART
+            } else {
+                alert('heart error')}
+                 //fetch to persist   
+        }
 
-//     pieces.forEach(piece => {
-//         rootEl.innerHTML += `<h2>${piece.name} -${piece.composer}</h2>
-//         <p>period: ${piece.period}</p>
-//         <p>key: ${piece.key}</p>
-//         <p>length: ${piece.length}</p>
-//         <p>liked?: ${piece.like}</p>`
-//     })
-// }
+        this.rootEl.innerHTML += `<h2>${piece.name}  -${piece.composer}</h2>
+        <p><a href="${piece.url}" target="_blank" rel="noopener noreferrer"><img border="0" alt="link to piece page"
+         src="${piece.img_url}" width="550" height="700"></a></p>
+        <p>like <button data-piece-id="${piece.id}" class="like-btn">${startHeart}</button></p>`
+
+    })
     
-        // populate the pieces, comments, & recitals properties with the returned data
+    document.querySelectorAll('.like-btn').forEach(function(btn) {
+         btn.addEventListener('click', (e) => (console.log(e.target.dataset)))
+         debugger
+    })
+    }
+}
+        //  add event listener on button to toggle the heart
+         
+  
 
+   
 
-    // renderPieces() {
-    //     // create DOM notes and insert data inthem to render in the DOM
+    // function changeHeart() {
+
     // }
+
+        // for later, add:
+            //<p>period: ${piece.period}</p>
+            // <p>key: ${piece.key}</p>
+            // <p>length: ${piece.length}</p>
+
+// const fillHeart = (hearts) => {
+    // const EMPTY_HEART = '♡'
+    // const FULL_HEART = '♥'
+    // const hearts = document.getElementsByClassName("like-glyph")
+    // const heart = document.querySelector("like-glyph")
+
+    // for (const heart of hearts) {
+    // heart.addEventListener("click", (e) => {
+    //     console.log(e)
+    //   if (heart.innerHTML === EMPTY_HEART){
+    //   // debugger
+    //       heart.innerText = FULL_HEART
+    //       heart.className = "activated-heart"
+    //   } else {
+    //       heart.innerText = EMPTY_HEART
+    //       heart.className = "like-glyph"
+    //   }
+    //   })
+    //   .catch(error => {
+    //     modal.hidden = false
+    //     const modalMessage = document.querySelector('#modal-message')
+    //     modalMessage.innerText = error
+    //     setTimeout(() =>{
+    //       modal.hidden = true
+    //     }, 5000)
+    //   })
+    // }
+//   }
+
+    // populate the pieces, comments, & recitals properties with the returned data
 
     // getComments() {
 
@@ -84,12 +136,3 @@ class AppContainer {
     // renderComments() {
 
     // }
-
-    // fetch('http://localhost:3000/pieces')
-// .then((res) => res.json())
-// .then(data => renderPieces(data))
-
-
-
-
-

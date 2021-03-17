@@ -1,5 +1,7 @@
 class Piece {
-    constructor(name, composer, length, key, period, like, url, img_url){
+    constructor(piece){
+        let {id, name, composer, length, key, period, like, url, img_url} = piece
+        this.id = id;
         this.name = name;
         this.composer = composer;
         this.length = length;

@@ -1,7 +1,4 @@
-body {
-    margin: 0;
-    font-family: monospace;
-  }
+
   
   #piece-header {
     display: flex;
@@ -51,7 +48,7 @@ body {
   }
   
   button:hover {
-    background-color: whitesmoke;
+    background-color: rgb(150, 14, 14);
     border: #e04b52 solid 1px;
     color: #e04b52;
   }
@@ -65,18 +62,6 @@ body {
     opacity: .8;
   }
   
-  .submit {
-    position: relative;
-    background-color: #e04b52;
-    border-radius: 5px;
-    height: 2rem;
-    width: max-content;
-    color: whitesmoke;
-    font-size: 18px;
-    justify-self: center;
-    font-family: monospace;
-    margin: 3px;
-  }
   
   .submit:hover {
     background-color: whitesmoke;
@@ -84,12 +69,74 @@ body {
     color: #e04b52;
   }
   
-  
-  .input-text {
-    border-radius: 5px;
-    height: 2rem;
-    width: 60%;
-    font-size: 18px;
-    font-family: monospace;
-    margin: 3px;
-  }
+
+
+
+    from "build the example"
+
+    body {
+      margin: 5% 10%;
+      background-color: rgb(29,161,242);
+    }
+
+    .like {
+      cursor: pointer;
+    }
+
+    body h1 {
+      color: #FFF;
+    }
+
+    body > header {
+      margin-bottom: 5%;
+    }
+
+    article.media-post {
+      border: solid 1px #000;
+      margin: 2% 3%;
+      background-color: #fff;
+    }
+
+    article.media-post > p {
+      background-color: rgba(0,123,255,0.25);
+      padding: 1em 2em;
+    }
+
+    article.media-post > header {
+      padding: 1em 2em;
+      background-color: rgb(225,232,237);
+    }
+
+    article.media-post > footer {
+      color: rgb(170,184,194);
+    }
+
+    article.media-post > footer ul {
+      list-style-type: none;
+    }
+
+    #modal {
+      border-radius: 10px;
+      background-color: maroon;
+      color: white;
+
+      margin: 1em;
+      padding: 1em;
+
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+
+    #modal p {
+      margin-bottom: 0;
+    }
+
+    .activated-heart {
+      color: red;
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
