@@ -3,5 +3,3 @@ app.getInitialPieces();
 // app.bindEventListeners();
 
 
-
-console.log('loaded')
