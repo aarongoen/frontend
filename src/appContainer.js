@@ -1,7 +1,7 @@
 class AppContainer {
     static pieces = []
      comments = []
-     recitals = {}
+    //  recitals = {}
 
      constructor(pieces, comments, recitals) {
         this.pieces = pieces;
@@ -40,14 +40,14 @@ class AppContainer {
     }
 
     renderPieces() {
-    const piecePreviewAndLinkEl = document.getElementById('piece-preview-and-link')
+    // const piecePreviewAndLinkEl = document.getElementById('piece-preview-and-link')
     const EMPTY_HEART = '♡'
     const FULL_HEART = '♥'
 
     AppContainer.pieces.forEach(piece => {
-        let newDiv = document.createElement("div"),
-        btn = document.createElement("button"),
-        pTag = document.createElement("p")
+        // let newDiv = document.createElement("div"),
+        // btn = document.createElement("button"),
+        // pTag = document.createElement("p")
         const commentForm = document.getElementById('comment-form')
         
         // newDiv.className = "card" 
@@ -79,28 +79,44 @@ class AppContainer {
             return `<ul>${c.text} <button data-id="${c.id}" class="delete-btn">x</button></ul>`
             })
         } 
-
     })
   
     //  adds an event listener on button to toggle the heart
         document.querySelectorAll('.like-btn').forEach((btn) => {
             btn.addEventListener('click',  (e) => {
-                // debugger
                 let pieceId = e.target.dataset.pieceId
-                let currentPiece = AppContainer.pieces[pieceId]
-                let changeHeart = function() {
-                    if (currentPiece.like === true) {
+                console.log(pieceId)
+                let currentPiece = AppContainer.pieces[pieceId-1]
+                console.log(currentPiece)
+                changeLike(currentPiece)
+            })
+
+
+            function changeLike(currentPiece) {
+                if (currentPiece.like === true) {
                     currentPiece.like = false
                     btn.innerHTML = EMPTY_HEART
-                        }
-                    else {
+                }
+                else {
                     currentPiece.like = true
                     btn.innerHTML = FULL_HEART
-                    }
                 }
-                changeHeart()
-            })
-    
+
+                fetch(`http://localhost:3000/pieces/${currentPiece.id}`, {
+                    method: "PATCH",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({"like": currentPiece.like})
+                })
+                .then((res) => res.json())
+                .catch((error) => {
+                    console.error("Error:", error)
+                })
+            }
+
+            
         })
 
         //creates an event listener on the submit button of a comment 
@@ -108,7 +124,7 @@ class AppContainer {
             textbox.addEventListener('submit', (e) => {
                 e.preventDefault();
                 let piece_id = e.target.dataset.pieceId
-                let currentPiece = AppContainer.pieces[piece_id]
+                // let currentPiece = AppContainer.pieces[piece_id]
                 let text= e.target.text.value
                 // debugger
                 const data = {
@@ -128,33 +144,36 @@ class AppContainer {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(data)
             })
             .then((res) => res.json())
-            // .then((comment) => console.log(comment))
             .then((data) => {
                 console.log(data)
-                const newComment = new Comment(data);
+                let newComment = new Comment(data);
                 // debugger
                 appendComment(newComment)
             })
             .catch((error) => {
                 console.error("Error:", error)
             })
-                // rootEl.innerHTML += newComment.renderComment();
         }
 
         function appendComment(comment) {
             let newComment = document.createElement('LI');
-            let btn = document.createElement("BUTTON")
+            let delBtn = document.createElement('BUTTON');
+
+            delBtn.setAttribute('class', 'delete-btn') 
+            delBtn.setAttribute('data-id', comment.id)
+            delBtn.innerText = 'x'
+
             console.log(comment)
             newComment.innerText = comment.text
             document.getElementById(comment.piece_id).appendChild(newComment)
-            newComment.appendChild(btn)
+            newComment.appendChild(delBtn).addEventListener('click', deleteComment)
         }
 
-        (document.querySelectorAll('.delete-btn')).forEach(btn => btn.addEventListener('click', deleteComment))
 
+        (document.querySelectorAll('.delete-btn')).forEach(delBtn => delBtn.addEventListener('click', deleteComment))
 
         function deleteComment(e) {
             const id = e.target.dataset.id;

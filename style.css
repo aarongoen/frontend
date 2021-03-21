@@ -35,7 +35,7 @@
     width: auto;
   }
   
-  button {
+  .like-button {
     position: relative;
     background-color: #e04b52;
     border: none;
@@ -46,6 +46,19 @@
     font-size: 18px;
     justify-self: center;
   }
+
+  /* delete-button {
+    position: relative;
+    background-color: hsl(0, 2%, 36%);
+    border: none;
+    border-radius: 5px;
+    height: 1rem;
+    width: max-content;
+    color: whitesmoke;
+    font-size: 14px;
+    justify-self: center;
+  } */
+
   
   button:hover {
     background-color: rgb(150, 14, 14);
@@ -76,7 +89,7 @@
   }
 
   .submit:hover {
-    background-color: whitesmoke;
+    background-color: #999696;
     border: #e04b52 solid 1px;
     color: #e04b52;
   }
@@ -89,72 +102,27 @@
     font-family: monospace;
     margin: 3px;
 
+  .body {
+    margin: 5% 10%;
+    background-color: rgb(29,161,242);
+  }
 
-    from "build the example"
+  .like {
+    cursor: pointer;
+  }
 
-    body {
-      margin: 5% 10%;
-      background-color: rgb(29,161,242);
-    }
+  body h1 {
+    color: #FFF;
+  }
 
-    .like {
-      cursor: pointer;
-    }
+  body > header {
+    margin-bottom: 5%;
+  }
 
-    body h1 {
-      color: #FFF;
-    }
+  .activated-heart {
+    color: red;
+  }
 
-    body > header {
-      margin-bottom: 5%;
-    }
-
-    article.media-post {
-      border: solid 1px #000;
-      margin: 2% 3%;
-      background-color: #fff;
-    }
-
-    article.media-post > p {
-      background-color: rgba(0,123,255,0.25);
-      padding: 1em 2em;
-    }
-
-    article.media-post > header {
-      padding: 1em 2em;
-      background-color: rgb(225,232,237);
-    }
-
-    article.media-post > footer {
-      color: rgb(170,184,194);
-    }
-
-    article.media-post > footer ul {
-      list-style-type: none;
-    }
-
-    #modal {
-      border-radius: 10px;
-      background-color: maroon;
-      color: white;
-
-      margin: 1em;
-      padding: 1em;
-
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-    }
-
-    #modal p {
-      margin-bottom: 0;
-    }
-
-    .activated-heart {
-      color: red;
-    }
-
-    .hidden {
-      visibility: hidden;
-    }
+  .hidden {
+    visibility: hidden;
+  }

@@ -1,15 +1,14 @@
 class Comment {
     constructor(comment) {
-        // debugger
+        this.id = comment.id;
         this.text = comment.text;
         this.piece_id = comment.piece_id;
-        // AppContainer.comments.push(this)
     }
 
 
-    renderIndexComment() {
-        return `<li>${this.text}</li>`
-    }
+    // renderIndexComment() {
+    //     return `<li>${this.text}</li>`
+    // }
 
 }
 // renderForm() {
@@ -19,4 +18,3 @@ class Comment {
 // }
 
 
-//create a belongs_to a piece (when instantiated?)
